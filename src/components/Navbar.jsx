@@ -8,8 +8,8 @@ const Navbar = () => {
   const location = useLocation()
 
   return (
-    <nav className="bg-transparent py-6 relative z-50">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+    <nav className="sticky top-0 bg-white/90 backdrop-blur-md border-b border-neutral-100 py-4 z-50">
+      <div className="px-6 sm:px-10 lg:px-16 w-full">
         {/* Desktop Navbar (MD and larger) */}
         <div className="hidden md:grid md:grid-cols-3 items-center h-12">
           

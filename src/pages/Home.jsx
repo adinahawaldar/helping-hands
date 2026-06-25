@@ -6,17 +6,30 @@ import FeaturedNGOs from '../components/FeaturedNGOs'
 import Transparency from '../components/Transparency'
 import SuccessStories from '../components/SuccessStories'
 import CTA from '../components/CTA'
+import FadeIn from '../components/FadeIn'
 
 const Home = () => {
   return (
     <div className="flex flex-col">
       <Hero />
-      <USPs />
-      <FeaturedCauses />
-      <FeaturedNGOs />
-      <Transparency />
-      <SuccessStories />
-      <CTA />
+      <FadeIn>
+        <USPs />
+      </FadeIn>
+      <FadeIn>
+        <FeaturedCauses />
+      </FadeIn>
+      <FadeIn>
+        <FeaturedNGOs />
+      </FadeIn>
+      <FadeIn>
+        <Transparency />
+      </FadeIn>
+      <FadeIn>
+        <SuccessStories />
+      </FadeIn>
+      <FadeIn>
+        <CTA />
+      </FadeIn>
     </div>
   )
 }

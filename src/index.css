@@ -2,6 +2,10 @@
 
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+}
+
 @theme {
   --color-brand-bg: #FFFFFF;
   --color-brand-sand: #EAE3D2;
