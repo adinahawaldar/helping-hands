@@ -46,7 +46,7 @@ const FeaturedNGOs = () => {
             Verified Partnerships
           </span>
           {/* Main Title */}
-          <h2 className="font-sans text-3xl sm:text-4xl md:text-[2.75rem] font-bold tracking-tight text-[#1A1A18] leading-tight mt-3">
+          <h2 className="font-serif text-[2.5rem] min-[380px]:text-[3rem] sm:text-[3.85rem] md:text-[4.5rem] font-bold tracking-tight text-[#1A1A18] leading-[1.1] mt-5 mb-4">
             Meet our verified partners
           </h2>
           {/* Subtitle */}

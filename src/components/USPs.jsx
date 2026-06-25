@@ -59,7 +59,7 @@ const USPs = () => {
       <div className="w-full max-w-7xl px-6 sm:px-8 lg:px-12 flex flex-col items-center text-center">
         {/* Header */}
         <div className="max-w-3xl mx-auto mb-6 flex flex-col items-center gap-3">
-          <h2 className="font-sans text-3xl sm:text-4xl md:text-[2.75rem] font-bold tracking-tight text-[#1A1A18] leading-tight">
+          <h2 className="font-serif text-[2.5rem] min-[380px]:text-[3rem] sm:text-[3.85rem] md:text-[4.5rem] font-bold tracking-tight text-[#1A1A18] leading-[1.1] mt-5 mb-4">
             Why choose Helping Hands?
           </h2>
           <p className="font-sans text-base sm:text-lg text-neutral-600 font-normal max-w-2xl">
