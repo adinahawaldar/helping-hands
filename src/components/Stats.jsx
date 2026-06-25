@@ -25,7 +25,7 @@ const Stats = () => {
   ]
 
   return (
-    <div className="bg-brand-sand-light border-y border-brand-sand/50 py-16 md:py-20">
+    <div className="bg-white border-y border-neutral-200 py-16 md:py-20">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
           {stats.map((stat, idx) => (

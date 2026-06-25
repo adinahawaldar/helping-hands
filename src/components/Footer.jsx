@@ -6,7 +6,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-brand-sand-light border-t border-brand-sand/50">
+    <footer className="bg-white border-t border-neutral-200">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
           {/* Logo & Vision */}
@@ -122,7 +122,7 @@ const Footer = () => {
         </div>
 
         {/* Divider & Copyright */}
-        <hr className="border-brand-sand/50 my-12" />
+        <hr className="border-neutral-200 my-12" />
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-brand-brown">
           <p>© {currentYear} Helping Hands. All rights reserved.</p>
           <div className="flex gap-6">

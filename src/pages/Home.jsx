@@ -1,5 +1,6 @@
 import React from 'react'
 import Hero from '../components/Hero'
+import USPs from '../components/USPs'
 import FeaturedCauses from '../components/FeaturedCauses'
 import FeaturedNGOs from '../components/FeaturedNGOs'
 import Transparency from '../components/Transparency'
@@ -10,6 +11,7 @@ const Home = () => {
   return (
     <div className="flex flex-col">
       <Hero />
+      <USPs />
       <FeaturedCauses />
       <FeaturedNGOs />
       <Transparency />

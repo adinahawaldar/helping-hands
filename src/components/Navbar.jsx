@@ -11,10 +11,10 @@ const Navbar = () => {
     <nav className="bg-transparent py-6 relative z-50">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         {/* Desktop Navbar (MD and larger) */}
-        <div className="hidden md:flex justify-between items-center h-12">
+        <div className="hidden md:grid md:grid-cols-3 items-center h-12">
           
           {/* Left Side: Dropdown links (Donate, Fundraise) */}
-          <div className="flex items-center gap-8 w-1/3 justify-start">
+          <div className="flex items-center gap-8 justify-start">
             {/* Donate Dropdown */}
             <div 
               className="relative"
@@ -80,7 +80,7 @@ const Navbar = () => {
           </div>
 
           {/* Center Logo */}
-          <div className="flex items-center justify-center w-1/3">
+          <div className="flex items-center justify-center">
             <Link to="/" className="flex items-center">
               <span className="font-sans text-2xl font-bold tracking-tight">
                 <span className="text-[#BE5B39]">Helping</span>
@@ -90,7 +90,7 @@ const Navbar = () => {
           </div>
 
           {/* Right Side: About, Sign in, Pill Button */}
-          <div className="flex items-center gap-6 w-1/3 justify-end">
+          <div className="flex items-center gap-6 justify-end">
             {/* About Dropdown */}
             <div 
               className="relative"
@@ -158,7 +158,7 @@ const Navbar = () => {
 
       {/* Mobile Drawer */}
       {isOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-[#FAF8F5]/95 backdrop-blur-md px-6 py-6 shadow-lg border-b border-brand-sand/20 animate-in fade-in slide-in-from-top-5 z-50">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-md px-6 py-6 shadow-lg border-b border-neutral-200 animate-in fade-in slide-in-from-top-5 z-50">
           <div className="flex flex-col gap-6">
             
             {/* Donate Section */}

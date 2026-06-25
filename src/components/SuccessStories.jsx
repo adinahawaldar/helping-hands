@@ -1,7 +1,9 @@
-import React from 'react'
-import { Quote } from 'lucide-react'
+import React, { useState } from 'react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 const SuccessStories = () => {
+  const [currentIndex, setCurrentIndex] = useState(0)
+
   const stories = [
     {
       id: 1,
@@ -23,56 +25,66 @@ const SuccessStories = () => {
     }
   ]
 
+  const nextStory = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % stories.length)
+  }
+
+  const prevStory = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + stories.length) % stories.length)
+  }
+
+  const current = stories[currentIndex]
+
   return (
-    <div className="bg-brand-bg py-24 border-b border-brand-sand/30">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-        {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto flex flex-col gap-4 mb-16">
-          <span className="font-sans text-xs font-semibold tracking-wider text-brand-sand-dark uppercase">
-            Real Stories, Real Lives
-          </span>
-          <h2 className="font-serif text-[2.2rem] min-[380px]:text-[2.5rem] sm:text-[3.25rem] md:text-[3.75rem] font-bold tracking-tight text-[#1A1A18] leading-[1.15]">
-            How your support changed lives
-          </h2>
-          <p className="text-brand-brown text-sm sm:text-base leading-relaxed">
-            Every contribution directly funds an individual child, a hungry family, or a community's core infrastructure.
-          </p>
+    <div className="bg-white py-20 border-b border-neutral-100 flex flex-col items-center justify-center">
+      <div className="w-full max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 flex flex-col items-center text-center">
+        {/* Double Quote Icon */}
+        <div className="text-[5rem] md:text-[6rem] text-neutral-400 font-serif leading-none select-none h-12 flex items-center justify-center mb-8">
+          “
         </div>
 
-        {/* Stories list */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-          {stories.map((story) => (
-            <div 
-              key={story.id} 
-              className="bg-brand-sand/20 border border-brand-sand/30 rounded-[2.5rem] p-6 sm:p-8 flex flex-col sm:flex-row gap-6 sm:gap-8 items-center"
-            >
-              {/* Profile image with large rounded corner */}
-              <div className="w-32 h-32 sm:w-44 sm:h-44 shrink-0 rounded-[2rem] overflow-hidden shadow-md">
-                <img
-                  src={story.image}
-                  alt={story.name}
-                  className="w-full h-full object-cover"
-                />
-              </div>
+        {/* Testimonial Quote Text */}
+        <blockquote className="min-h-[140px] flex items-center justify-center">
+          <p className="font-sans text-xl sm:text-2xl md:text-[1.85rem] font-medium text-neutral-800 leading-relaxed tracking-tight max-w-3xl">
+            {current.quote}
+          </p>
+        </blockquote>
 
-              {/* Story Details */}
-              <div className="flex flex-col gap-4 flex-grow">
-                <Quote className="w-8 h-8 text-brand-sand-dark opacity-35" />
-                <p className="text-brand-charcoal text-sm leading-relaxed italic font-serif">
-                  "{story.quote}"
-                </p>
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-t border-brand-sand/40 pt-4 text-xs">
-                  <div>
-                    <span className="font-bold text-brand-charcoal block">{story.name}, {story.age}</span>
-                    <span className="text-brand-brown">{story.location}</span>
-                  </div>
-                  <span className="inline-block bg-brand-charcoal text-brand-bg px-3 py-1 rounded-full font-medium tracking-wide">
-                    {story.impact}
-                  </span>
-                </div>
-              </div>
-            </div>
-          ))}
+        {/* User Image (Avatar) */}
+        <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-white shadow-md mx-auto mt-10 mb-4 transition-all">
+          <img
+            src={current.image}
+            alt={current.name}
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+        {/* User Info Details */}
+        <div className="flex flex-col items-center">
+          <span className="font-sans font-bold text-[#1A1A18] text-base">
+            {current.name}, {current.age}
+          </span>
+          <span className="text-neutral-500 text-xs sm:text-sm font-medium mt-1">
+            {current.location} • {current.impact}
+          </span>
+        </div>
+
+        {/* Navigation buttons */}
+        <div className="flex gap-3 justify-center mt-10">
+          <button
+            onClick={prevStory}
+            className="w-10 h-10 rounded-full border border-neutral-200 bg-white hover:bg-neutral-50 flex items-center justify-center text-neutral-600 transition-all active:scale-95 cursor-pointer shadow-sm"
+            aria-label="Previous story"
+          >
+            <ChevronLeft className="w-5 h-5 text-neutral-850" strokeWidth={2} />
+          </button>
+          <button
+            onClick={nextStory}
+            className="w-10 h-10 rounded-full border border-neutral-200 bg-white hover:bg-neutral-50 flex items-center justify-center text-neutral-600 transition-all active:scale-95 cursor-pointer shadow-sm"
+            aria-label="Next story"
+          >
+            <ChevronRight className="w-5 h-5 text-neutral-850" strokeWidth={2} />
+          </button>
         </div>
       </div>
     </div>

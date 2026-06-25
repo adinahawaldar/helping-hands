@@ -24,17 +24,17 @@ const HowItWorks = () => {
   ]
 
   return (
-    <div className="bg-brand-bg py-24 border-b border-brand-sand/30">
+    <div className="bg-white py-24 border-b border-neutral-200">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto flex flex-col gap-4 mb-16 md:mb-20">
-          <span className="font-sans text-xs font-semibold tracking-wider text-brand-sand-dark uppercase">
+          <span className="text-[11px] font-extrabold tracking-widest text-[#BE5B39] uppercase">
             Simple 3 Steps
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-brand-charcoal leading-tight">
             How Helping Hands works
           </h2>
-          <p className="text-brand-brown text-sm sm:text-base leading-relaxed">
+          <p className="text-neutral-500 text-sm sm:text-base leading-relaxed">
             We provide a transparent, friction-free pipeline from your generous heart to the hands on the ground.
           </p>
         </div>
@@ -45,7 +45,7 @@ const HowItWorks = () => {
             <div key={idx} className="relative flex flex-col items-center text-center gap-6 group">
               {/* Step Badge & Icon */}
               <div className="relative">
-                <div className="w-16 h-16 rounded-full bg-brand-sand-light border border-brand-sand/55 flex items-center justify-center transition-all duration-300 group-hover:bg-brand-sand/50">
+                <div className="w-16 h-16 rounded-full bg-white border border-[#1A1A18] flex items-center justify-center transition-all duration-300 group-hover:bg-neutral-50 shadow-sm">
                   {step.icon}
                 </div>
                 <span className="absolute -top-3 -right-3 font-serif text-2xl font-light italic text-brand-sand-dark opacity-60">
@@ -58,14 +58,14 @@ const HowItWorks = () => {
                 <h3 className="font-serif text-xl font-medium text-brand-charcoal">
                   {step.title}
                 </h3>
-                <p className="text-brand-brown text-sm leading-relaxed max-w-xs mx-auto">
+                <p className="text-neutral-500 text-sm leading-relaxed max-w-xs mx-auto">
                   {step.desc}
                 </p>
               </div>
 
               {/* Connector line for desktop (exclude last card) */}
               {idx < 2 && (
-                <div className="hidden md:block absolute top-8 left-[70%] w-[60%] h-[1px] bg-brand-sand/50" />
+                <div className="hidden md:block absolute top-8 left-[70%] w-[60%] h-[1px] bg-[#1A1A18]/25" />
               )}
             </div>
           ))}

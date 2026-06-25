@@ -89,10 +89,10 @@ const FeaturedCauses = () => {
           <span className="font-sans text-xs sm:text-sm font-bold tracking-wider text-neutral-500 uppercase">
             Make donations with confidence
           </span>
-          <h2 className="font-serif text-[2.2rem] min-[380px]:text-[2.5rem] sm:text-[3.25rem] md:text-[3.75rem] font-bold tracking-tight text-[#1A1A18] leading-[1.15] mt-3">
+          <h2 className="font-serif text-[2.5rem] min-[380px]:text-[3rem] sm:text-[3.85rem] md:text-[4.5rem] font-bold tracking-tight text-[#1A1A18] leading-[1.1] mt-3">
             Donate to verified medical & emergency fundraisers
           </h2>
-          <p className="font-sans text-sm sm:text-base text-neutral-500 font-normal max-w-2xl mt-1">
+          <p className="font-sans text-xs sm:text-sm text-neutral-500 font-normal max-w-xl">
             Safely support fundraisers for people seeking help with medical care and emergencies.
           </p>
         </div>
@@ -109,7 +109,7 @@ const FeaturedCauses = () => {
           {causes.map((cause) => (
             <div 
               key={cause.id} 
-              className="bg-white border border-neutral-100 rounded-[2rem] p-4 flex flex-col hover:shadow-md transition-all duration-300"
+              className="bg-white border border-[#1A1A18] shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-[2rem] p-4 flex flex-col hover:-translate-y-1 hover:shadow-[0_12px_24px_-10px_rgba(0,0,0,0.08)] transition-all duration-300"
             >
               {/* Cause Image */}
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-sm">
