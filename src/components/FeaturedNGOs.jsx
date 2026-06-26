@@ -1,40 +1,27 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { CheckCircle2, GraduationCap, HeartHandshake, Activity } from 'lucide-react'
+import { CheckCircle2, GraduationCap, HeartHandshake, Activity, ShieldAlert } from 'lucide-react'
+import { mockNGOs } from '../data/mockNGOs'
 
 const FeaturedNGOs = () => {
-  const ngos = [
-    {
-      id: 1,
-      name: 'ABC Foundation',
-      verified: true,
-      focus: 'Education Support',
-      desc: 'ABC Foundation is a registered charity dedicated to reducing school dropout rates in low-income urban settlements.',
-      projectsCount: 12,
-      impactCount: '5,000+ Students',
-      icon: <GraduationCap className="w-6 h-6 text-[#1A1A18]" strokeWidth={1.5} />
-    },
-    {
-      id: 2,
-      name: 'Feeding Hands NGO',
-      verified: true,
-      focus: 'Hunger Relief',
-      desc: 'Feeding Hands operates community kitchens that provide cooked meals and dry ration packs to needy households.',
-      projectsCount: 8,
-      impactCount: '25,000+ Meals',
-      icon: <HeartHandshake className="w-6 h-6 text-[#1A1A18]" strokeWidth={1.5} />
-    },
-    {
-      id: 3,
-      name: 'Care & Cure Trust',
-      verified: true,
-      focus: 'Healthcare Services',
-      desc: 'Care & Cure organizes rural medical camps, subsidizes primary treatments, and sponsors emergency surgeries.',
-      projectsCount: 15,
-      impactCount: '1,200+ Surgeries',
-      icon: <Activity className="w-6 h-6 text-[#1A1A18]" strokeWidth={1.5} />
+  const getIcon = (iconName) => {
+    switch (iconName) {
+      case 'GraduationCap':
+        return <GraduationCap className="w-6 h-6 text-[#1A1A18]" strokeWidth={1.5} />;
+      case 'HeartHandshake':
+        return <HeartHandshake className="w-6 h-6 text-[#1A1A18]" strokeWidth={1.5} />;
+      case 'Activity':
+        return <Activity className="w-6 h-6 text-[#1A1A18]" strokeWidth={1.5} />;
+      case 'ShieldAlert':
+        return <ShieldAlert className="w-6 h-6 text-[#1A1A18]" strokeWidth={1.5} />;
+      default:
+        return <Activity className="w-6 h-6 text-[#1A1A18]" strokeWidth={1.5} />;
     }
-  ]
+  };
+
+  // Only take the first 3 for the homepage featured grid
+  const ngos = mockNGOs.slice(0, 3)
+
 
   return (
     <div className="bg-white py-20 border-b border-neutral-100">
@@ -66,7 +53,7 @@ const FeaturedNGOs = () => {
                 {/* Header: Logo container & verified badge */}
                 <div className="flex items-center justify-between mb-6">
                   <div className="w-12 h-12 rounded-xl bg-[#FAF8F5] border border-neutral-200/60 flex items-center justify-center">
-                    {ngo.icon}
+                    {getIcon(ngo.iconName)}
                   </div>
                   {ngo.verified && (
                     <div className="flex items-center gap-1.5 bg-emerald-50/50 border border-emerald-100/80 text-emerald-800 px-3 py-1 rounded-full text-[11px] font-semibold">

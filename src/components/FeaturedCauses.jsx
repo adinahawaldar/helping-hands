@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { mockCauses } from '../data/mockCauses'
 
 const CircularProgress = ({ percentage }) => {
   const radius = 16;
@@ -40,47 +41,8 @@ const CircularProgress = ({ percentage }) => {
 }
 
 const FeaturedCauses = () => {
-  const causes = [
-    {
-      id: 1,
-      title: "Urgent Funds Needed for Anita's Stage 3 Leukemia Treatment",
-      location: 'MUMBAI, INDIA',
-      raised: 320000,
-      goal: 800000,
-      percentage: 40,
-      image: '/hero_unity.png',
-      ngo: 'Care & Cure Trust',
-      condition: 'Leukemia (Cancer)',
-      urgency: 'Critical • 4 Days Left',
-      detail: 'Requires 6 cycles of intensive chemotherapy and an immediate bone marrow transplant to survive.'
-    },
-    {
-      id: 2,
-      title: 'Emergency Kidney Transplant for 8-Year-Old Ayan',
-      location: 'DELHI, INDIA',
-      raised: 540000,
-      goal: 600000,
-      percentage: 90,
-      image: '/hero_children.png',
-      ngo: 'Feeding Hands NGO',
-      condition: 'Kidney Failure',
-      urgency: 'Immediate • 24h Left',
-      detail: 'Matching donor found. Requires immediate surgery at AIIMS to avoid critical complications.'
-    },
-    {
-      id: 3,
-      title: "Support Rahul's Recovery from Severe Traumatic Brain Injury",
-      location: 'BANGALORE, INDIA',
-      raised: 450000,
-      goal: 1000000,
-      percentage: 45,
-      image: '/hero_mud_hands.png',
-      ngo: 'ABC Foundation',
-      condition: 'Brain Trauma',
-      urgency: 'Urgent • 6 Days Left',
-      detail: 'Currently on ventilator support in the ICU. Funds are needed for daily hospital bills and surgery.'
-    }
-  ]
+  const causes = mockCauses
+
 
   const formatCurrency = (value) => {
     return new Intl.NumberFormat('en-IN', {
@@ -170,7 +132,7 @@ const FeaturedCauses = () => {
                     View Details
                   </Link>
                   <Link
-                    to={`/cause/${cause.id}`}
+                    to={`/donate/${cause.id}`}
                     className="bg-[#1A1A18] text-white px-4 py-1.5 rounded-full text-xs font-bold hover:bg-[#BE5B39] transition-all flex items-center gap-1 shadow-sm"
                   >
                     Donate Now

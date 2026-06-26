@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Menu, X, ChevronDown, Heart, Sparkles } from 'lucide-react'
+import { Menu, X, ChevronDown, Heart, Sparkles, Building2 } from 'lucide-react'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -27,18 +27,29 @@ const Navbar = () => {
               </button>
               
               {openDropdown === 'donate' && (
-                <div className="absolute top-full left-0 mt-2 w-80 bg-white rounded-2xl shadow-xl border border-neutral-100 p-6 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
-                  <Link to="/causes" className="flex items-start gap-4 p-2 hover:bg-neutral-50 rounded-xl transition-colors">
-                    <div className="w-10 h-10 rounded-full bg-neutral-100 flex items-center justify-center text-brand-charcoal shrink-0">
+                <div className="absolute top-full left-0 w-80 bg-white rounded-none shadow-xl border border-neutral-100 p-6 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                  <Link to="/ngos" className="flex items-start gap-4 p-2 hover:bg-neutral-50 rounded-none transition-colors">
+                    <div className="w-10 h-10 bg-neutral-100 flex items-center justify-center text-brand-charcoal shrink-0">
+                      <Building2 className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <span className="block text-sm font-semibold text-brand-charcoal">Verified NGO Partners</span>
+                      <span className="block text-xs text-neutral-500 mt-0.5">Support vetted operations & programs</span>
+                    </div>
+                  </Link>
+                  
+                  <Link to="/causes" className="flex items-start gap-4 p-2 hover:bg-neutral-50 rounded-none transition-colors mt-3">
+                    <div className="w-10 h-10 bg-neutral-100 flex items-center justify-center text-brand-charcoal shrink-0">
                       <Heart className="w-5 h-5" />
                     </div>
                     <div>
-                      <span className="block text-sm font-semibold text-brand-charcoal">Discover fundraisers to support</span>
+                      <span className="block text-sm font-semibold text-brand-charcoal">Discover Fundraisers</span>
                       <span className="block text-xs text-neutral-500 mt-0.5">Explore active community campaigns</span>
                     </div>
                   </Link>
+                  
                   <div className="mt-4 border-t border-neutral-100 pt-4">
-                    <span className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider px-2 mb-2">Categories</span>
+                    <span className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider px-2 mb-2">Emergency Types</span>
                     <Link to="/causes" className="block px-2 py-1 text-sm text-brand-brown hover:text-brand-charcoal font-medium">Education Support</Link>
                     <Link to="/causes" className="block px-2 py-1 text-sm text-brand-brown hover:text-brand-charcoal font-medium">Food & Hunger Relief</Link>
                     <Link to="/causes" className="block px-2 py-1 text-sm text-brand-brown hover:text-brand-charcoal font-medium">Medical Emergency</Link>
@@ -59,9 +70,9 @@ const Navbar = () => {
               </button>
               
               {openDropdown === 'fundraise' && (
-                <div className="absolute top-full left-0 mt-2 w-80 bg-white rounded-2xl shadow-xl border border-neutral-100 p-6 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
-                  <Link to="/contact" className="flex items-start gap-4 p-2 hover:bg-neutral-50 rounded-xl transition-colors">
-                    <div className="w-10 h-10 rounded-full bg-neutral-100 flex items-center justify-center text-brand-charcoal shrink-0">
+                <div className="absolute top-full left-0 w-80 bg-white rounded-none shadow-xl border border-neutral-100 p-6 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                  <Link to="/contact" className="flex items-start gap-4 p-2 hover:bg-neutral-50 rounded-none transition-colors">
+                    <div className="w-10 h-10 bg-neutral-100 flex items-center justify-center text-brand-charcoal shrink-0">
                       <Sparkles className="w-5 h-5" />
                     </div>
                     <div>
@@ -103,12 +114,12 @@ const Navbar = () => {
               </button>
               
               {openDropdown === 'about' && (
-                <div className="absolute top-full right-0 mt-2 w-72 bg-white rounded-2xl shadow-xl border border-neutral-100 p-6 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
-                  <Link to="/about" className="block p-2 hover:bg-neutral-50 rounded-xl transition-colors">
+                <div className="absolute top-full right-0 w-72 bg-white rounded-none shadow-xl border border-neutral-100 p-6 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                  <Link to="/about" className="block p-2 hover:bg-neutral-50 rounded-none transition-colors">
                     <span className="block text-sm font-semibold text-brand-charcoal">Our Mission</span>
                     <span className="block text-xs text-neutral-500 mt-0.5">Grassroots transparency and audit reports</span>
                   </Link>
-                  <Link to="/transparency" className="block p-2 hover:bg-neutral-50 rounded-xl transition-colors mt-2">
+                  <Link to="/transparency" className="block p-2 hover:bg-neutral-50 rounded-none transition-colors mt-2">
                     <span className="block text-sm font-semibold text-brand-charcoal">Transparency Pipeline</span>
                     <span className="block text-xs text-neutral-500 mt-0.5">Track every donation to the field</span>
                   </Link>
