@@ -46,6 +46,12 @@ const Fundraise = () => {
   const [submitPhase, setSubmitPhase] = useState(0) // 0: Idle, 1: Uploading, 2: Checking, 3: Completed
   const [createdCauseId, setCreatedCauseId] = useState(null)
   const [fastTracking, setFastTracking] = useState(false)
+  
+  // Validation errors
+  const [validationErrors, setValidationErrors] = useState({
+    email: '',
+    phone: ''
+  })
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -54,6 +60,14 @@ const Fundraise = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target
     setFormData(prev => ({ ...prev, [name]: value }))
+    
+    // Clear errors on edit
+    if (name === 'email') {
+      setValidationErrors(prev => ({ ...prev, email: '' }))
+    }
+    if (name === 'phone') {
+      setValidationErrors(prev => ({ ...prev, phone: '' }))
+    }
   }
 
   // Handle file selections converting them to base64
@@ -120,7 +134,39 @@ const Fundraise = () => {
       return formData.title && formData.location && formData.goal > 0
     }
     if (currentStep === 2) {
-      return formData.postedBy && formData.detail && formData.longDescription && formData.beneficiaryName
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      const isEmailValid = emailRegex.test(formData.email)
+      
+      const cleanPhone = formData.phone.replace(/[\s\-\(\)\+]/g, '')
+      // Check for a standard phone length between 10 and 12 digits
+      const isPhoneValid = cleanPhone.length >= 10 && cleanPhone.length <= 12 && /^\d+$/.test(cleanPhone)
+      
+      let emailErr = ''
+      let phoneErr = ''
+      
+      if (!formData.email) {
+        emailErr = 'Email address is required.'
+      } else if (!isEmailValid) {
+        emailErr = 'Please enter a valid email address (e.g. name@domain.com).'
+      }
+      
+      if (!formData.phone) {
+        phoneErr = 'Phone number is required.'
+      } else if (!isPhoneValid) {
+        phoneErr = 'Please enter a valid 10 to 12 digit phone number.'
+      }
+      
+      setValidationErrors({
+        email: emailErr,
+        phone: phoneErr
+      })
+      
+      return formData.postedBy && 
+             formData.detail && 
+             formData.longDescription && 
+             formData.beneficiaryName && 
+             isEmailValid && 
+             isPhoneValid
     }
     if (currentStep === 3) {
       return formData.image && formData.verificationDocs.length > 0
@@ -426,9 +472,14 @@ const Fundraise = () => {
                       placeholder="e.g. +91 98765 43210"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      className="w-full border border-neutral-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#1A1A18] text-brand-charcoal"
+                      className={`w-full border rounded-xl px-4 py-3 text-sm focus:outline-none text-brand-charcoal ${
+                        validationErrors.phone ? 'border-red-500 focus:border-red-500' : 'border-neutral-300 focus:border-[#1A1A18]'
+                      }`}
                       required
                     />
+                    {validationErrors.phone && (
+                      <span className="text-[10px] text-red-500 font-semibold">{validationErrors.phone}</span>
+                    )}
                   </div>
 
                   <div className="flex flex-col gap-2">
@@ -439,9 +490,14 @@ const Fundraise = () => {
                       placeholder="e.g. sunil.kumar@gmail.com"
                       value={formData.email}
                       onChange={handleInputChange}
-                      className="w-full border border-neutral-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#1A1A18] text-brand-charcoal"
+                      className={`w-full border rounded-xl px-4 py-3 text-sm focus:outline-none text-brand-charcoal ${
+                        validationErrors.email ? 'border-red-500 focus:border-red-500' : 'border-neutral-300 focus:border-[#1A1A18]'
+                      }`}
                       required
                     />
+                    {validationErrors.email && (
+                      <span className="text-[10px] text-red-500 font-semibold">{validationErrors.email}</span>
+                    )}
                   </div>
                 </div>
 
