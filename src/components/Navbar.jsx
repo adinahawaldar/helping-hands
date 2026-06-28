@@ -28,24 +28,14 @@ const Navbar = () => {
               
               {openDropdown === 'donate' && (
                 <div className="absolute top-full left-0 w-80 bg-white rounded-none shadow-xl border border-neutral-100 p-6 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
-                  <Link to="/ngos" className="flex items-start gap-4 p-2 hover:bg-neutral-50 rounded-none transition-colors">
-                    <div className="w-10 h-10 bg-neutral-100 flex items-center justify-center text-brand-charcoal shrink-0">
-                      <Building2 className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <span className="block text-sm font-semibold text-brand-charcoal">Verified NGO Partners</span>
-                      <span className="block text-xs text-neutral-500 mt-0.5">Support vetted operations & programs</span>
-                    </div>
+                  <Link to="/ngos" className="flex flex-col gap-0.5 p-2 hover:bg-neutral-50 rounded-none transition-colors">
+                    <span className="block text-sm font-semibold text-brand-charcoal">Verified NGO Partners</span>
+                    <span className="block text-xs text-neutral-500">Support vetted operations & programs</span>
                   </Link>
                   
-                  <Link to="/causes" className="flex items-start gap-4 p-2 hover:bg-neutral-50 rounded-none transition-colors mt-3">
-                    <div className="w-10 h-10 bg-neutral-100 flex items-center justify-center text-brand-charcoal shrink-0">
-                      <Heart className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <span className="block text-sm font-semibold text-brand-charcoal">Discover Fundraisers</span>
-                      <span className="block text-xs text-neutral-500 mt-0.5">Explore active community campaigns</span>
-                    </div>
+                  <Link to="/causes" className="flex flex-col gap-0.5 p-2 hover:bg-neutral-50 rounded-none transition-colors mt-3">
+                    <span className="block text-sm font-semibold text-brand-charcoal">Discover Fundraisers</span>
+                    <span className="block text-xs text-neutral-500">Explore active community campaigns</span>
                   </Link>
                   
                   <div className="mt-4 border-t border-neutral-100 pt-4">
@@ -73,34 +63,19 @@ const Navbar = () => {
                 <div className="absolute top-full left-0 w-[450px] bg-white rounded-none shadow-xl border border-neutral-100 p-6 z-50 animate-in fade-in slide-in-from-top-2 duration-200 grid grid-cols-12 gap-6">
                   {/* Left Column: Actions */}
                   <div className="col-span-7 flex flex-col gap-3 border-r border-neutral-100 pr-5">
-                    <Link to="/fundraise" className="flex items-start gap-3 p-2 hover:bg-neutral-50 rounded-none transition-colors">
-                      <div className="w-8 h-8 bg-neutral-100 flex items-center justify-center text-[#BE5B39] shrink-0">
-                        <Sparkles className="w-4.5 h-4.5" />
-                      </div>
-                      <div>
-                        <span className="block text-xs font-bold text-brand-charcoal">Start a Fundraiser</span>
-                        <span className="block text-[10px] text-neutral-400 mt-0.5">Launch a transparent campaign in minutes</span>
-                      </div>
+                    <Link to="/fundraise" className="flex flex-col gap-0.5 p-2 hover:bg-neutral-50 rounded-none transition-colors">
+                      <span className="block text-xs font-bold text-brand-charcoal">Start a Fundraiser</span>
+                      <span className="block text-[10px] text-neutral-400">Launch a transparent campaign in minutes</span>
                     </Link>
                     
-                    <Link to="/fundraise" className="flex items-start gap-3 p-2 hover:bg-[#F5EFE0]/50 rounded-none transition-colors">
-                      <div className="w-8 h-8 bg-[#F5EFE0] flex items-center justify-center text-brand-charcoal shrink-0">
-                        <BookOpen className="w-4.5 h-4.5" />
-                      </div>
-                      <div>
-                        <span className="block text-xs font-bold text-brand-charcoal">How it works</span>
-                        <span className="block text-[10px] text-neutral-400 mt-0.5">Learn about the 1-hour verification pipeline</span>
-                      </div>
+                    <Link to="/fundraise" className="flex flex-col gap-0.5 p-2 hover:bg-[#F5EFE0]/50 rounded-none transition-colors">
+                      <span className="block text-xs font-bold text-brand-charcoal">How it works</span>
+                      <span className="block text-[10px] text-neutral-400">Learn about the 1-hour verification pipeline</span>
                     </Link>
                     
-                    <Link to="/causes" className="flex items-start gap-3 p-2 hover:bg-neutral-50 rounded-none transition-colors">
-                      <div className="w-8 h-8 bg-neutral-100 flex items-center justify-center text-brand-charcoal shrink-0">
-                        <Users className="w-4.5 h-4.5" />
-                      </div>
-                      <div>
-                        <span className="block text-xs font-bold text-brand-charcoal">Browse active causes</span>
-                        <span className="block text-[10px] text-neutral-400 mt-0.5">See verified disaster and medical campaigns</span>
-                      </div>
+                    <Link to="/causes" className="flex flex-col gap-0.5 p-2 hover:bg-neutral-50 rounded-none transition-colors">
+                      <span className="block text-xs font-bold text-brand-charcoal">Browse active causes</span>
+                      <span className="block text-[10px] text-neutral-400">See verified disaster and medical campaigns</span>
                     </Link>
                   </div>
                   
