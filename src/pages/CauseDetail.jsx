@@ -1,18 +1,35 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { mockCauses } from '../data/mockCauses'
 import { ShieldCheck, Calendar, Users, Heart, Award, ArrowLeft, ArrowUpRight } from 'lucide-react'
 
 const CauseDetail = () => {
   const { id } = useParams()
-  
-  // Find specific campaign
-  const causeId = id ? parseInt(id) : 1
-  const cause = mockCauses.find(c => c.id === causeId) || mockCauses[0]
+  const [cause, setCause] = useState(null)
+  const [loading, setLoading] = useState(true)
 
-  // Scroll to top on load
+  // Fetch campaign details and scroll to top on load
   useEffect(() => {
     window.scrollTo(0, 0)
+    setLoading(true)
+    
+    const causeId = id ? parseInt(id) : 1
+    
+    fetch(`http://localhost:5000/api/causes/${causeId}`)
+      .then(res => {
+        if (!res.ok) throw new Error('Not found in backend')
+        return res.json()
+      })
+      .then(data => {
+        setCause(data)
+        setLoading(false)
+      })
+      .catch(err => {
+        console.log('Using local mockCauses fallback', err)
+        const fallbackCause = mockCauses.find(c => c.id === causeId) || mockCauses[0]
+        setCause(fallbackCause)
+        setLoading(false)
+      })
   }, [id])
 
   const formatCurrency = (value) => {
@@ -21,6 +38,31 @@ const CauseDetail = () => {
       currency: 'INR',
       maximumFractionDigits: 0
     }).format(value)
+  }
+
+  if (loading) {
+    return (
+      <div className="bg-white min-h-screen py-24 flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-12 h-12 border-2 border-brand-charcoal border-t-transparent rounded-full animate-spin" />
+          <p className="text-neutral-500 font-serif italic text-sm">Fetching campaign details...</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (!cause) {
+    return (
+      <div className="bg-white min-h-screen py-24 flex items-center justify-center">
+        <div className="text-center max-w-md mx-auto px-6 flex flex-col gap-4">
+          <h2 className="font-serif text-2xl font-bold text-brand-charcoal">Campaign Not Found</h2>
+          <p className="text-neutral-500 text-sm">The campaign you are looking for does not exist or has not been verified yet.</p>
+          <Link to="/causes" className="bg-[#1A1A18] text-white px-6 py-2.5 rounded-full text-xs font-bold hover:bg-[#BE5B39] transition-all">
+            Back to Fundraisers
+          </Link>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -44,8 +86,8 @@ const CauseDetail = () => {
             {/* Condition Badge & Title */}
             <div className="flex flex-col gap-3">
               <div className="flex items-center gap-2">
-                <span className="text-[10px] bg-red-50 text-red-600 px-3 py-1 rounded-full font-bold uppercase tracking-wider">
-                  {cause.condition}
+                <span className="text-[10px] bg-red-50 text-red-650 px-3 py-1 rounded-full font-bold uppercase tracking-wider">
+                  {cause.condition || cause.category}
                 </span>
                 <span className="text-xs text-neutral-400 font-semibold uppercase tracking-wider flex items-center gap-1 select-none">
                   • <span>{cause.location}</span>
@@ -77,7 +119,7 @@ const CauseDetail = () => {
               </div>
               <div className="ml-auto bg-emerald-50 text-emerald-700 font-bold text-[10px] uppercase tracking-wider px-3 py-1 rounded-full shrink-0 flex items-center gap-1 select-none">
                 <ShieldCheck className="w-3.5 h-3.5" />
-                <span>Verified</span>
+                <span>{cause.isVerified ? 'Verified' : 'Pending Check'}</span>
               </div>
             </div>
 
@@ -87,12 +129,79 @@ const CauseDetail = () => {
                 The Story
               </h2>
               <p className="text-neutral-700 text-sm sm:text-base leading-relaxed whitespace-pre-line font-normal">
-                {cause.longDescription}
+                {cause.longDescription || cause.detail}
               </p>
               <p className="text-neutral-600 text-sm sm:text-base leading-relaxed mt-2">
                 Every single rupee contributed through Helping Hands goes directly to the hospital/NGO billing account. Real-time receipts, audit logs, and status updates will be published right here on the campaign page.
               </p>
             </div>
+
+            {/* Supporting Images Gallery */}
+            {cause.supportingImages && cause.supportingImages.length > 0 && (
+              <div className="flex flex-col gap-4 border-t border-neutral-150 pt-8">
+                <h3 className="font-serif text-xl font-bold text-[#1A1A18]">
+                  Supporting Media & Evidence
+                </h3>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                  {cause.supportingImages.map((img, index) => (
+                    <div key={index} className="aspect-[4/3] rounded-xl overflow-hidden border border-neutral-200 bg-neutral-50 shadow-xs">
+                      <img 
+                        src={img} 
+                        alt={`Supporting document ${index + 1}`} 
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300 cursor-zoom-in"
+                        onClick={() => window.open(img, '_blank')}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Verification Documents & Badges */}
+            {((cause.verificationDocs && cause.verificationDocs.length > 0) || !cause.ngo.includes("Independent")) && (
+              <div className="flex flex-col gap-4 border-t border-neutral-150 pt-8">
+                <h3 className="font-serif text-xl font-bold text-[#1A1A18]">
+                  Verification Checklist
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="flex items-center gap-2 text-xs font-semibold text-emerald-800 bg-emerald-50 border border-emerald-100 p-3 rounded-xl">
+                    <ShieldCheck className="w-4.5 h-4.5 shrink-0 text-emerald-600" />
+                    <span>Identity Verification: {cause.isVerified ? 'Passed' : 'In Progress'}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs font-semibold text-emerald-800 bg-emerald-50 border border-emerald-100 p-3 rounded-xl">
+                    <ShieldCheck className="w-4.5 h-4.5 shrink-0 text-emerald-600" />
+                    <span>Documentation Check: {cause.isVerified ? 'Passed' : 'In Progress'}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs font-semibold text-emerald-800 bg-emerald-50 border border-emerald-100 p-3 rounded-xl">
+                    <ShieldCheck className="w-4.5 h-4.5 shrink-0 text-emerald-600" />
+                    <span>Beneficiary Audit: {cause.isVerified ? 'Completed' : 'In Progress'}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs font-semibold text-emerald-800 bg-emerald-50 border border-emerald-100 p-3 rounded-xl">
+                    <ShieldCheck className="w-4.5 h-4.5 shrink-0 text-emerald-600" />
+                    <span>Direct Hospital Transfer: Confirmed</span>
+                  </div>
+                </div>
+                {cause.verificationDocs && cause.verificationDocs.length > 0 && (
+                  <div className="mt-2 flex flex-col gap-2">
+                    <span className="text-xs text-neutral-400 font-semibold uppercase tracking-wider">Uploaded Audit Evidence:</span>
+                    <div className="flex flex-wrap gap-2">
+                      {cause.verificationDocs.map((doc, idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => {
+                            const newTab = window.open();
+                            newTab.document.write(`<iframe src="${doc}" frameborder="0" style="border:0; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%;" allowfullscreen></iframe>`);
+                          }}
+                          className="px-3.5 py-1.5 bg-neutral-100 hover:bg-neutral-200 border border-neutral-200 rounded-lg text-xs font-medium text-brand-charcoal transition-colors cursor-pointer"
+                        >
+                          Verification_Document_{idx + 1}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* Safe Giving Info */}
             <div className="bg-[#EAE3D2]/30 border border-[#7D725C]/20 rounded-2xl p-6 text-sm text-[#7D725C] leading-relaxed flex gap-3.5 items-start mt-4">
@@ -131,7 +240,7 @@ const CauseDetail = () => {
                 </div>
                 <div className="flex justify-between items-center text-xs mt-1 font-semibold text-neutral-500">
                   <span className="text-emerald-600 font-bold">{cause.percentage}% Funded</span>
-                  <span>{cause.donorsCount} Supporters</span>
+                  <span>{cause.donorsCount || 0} Supporters</span>
                 </div>
               </div>
 
@@ -143,7 +252,7 @@ const CauseDetail = () => {
                   </div>
                   <div className="flex flex-col min-w-0">
                     <span className="text-[10px] font-bold text-neutral-450 uppercase tracking-wider">Donors</span>
-                    <strong className="text-xs text-neutral-800 font-bold">{cause.donorsCount}</strong>
+                    <strong className="text-xs text-neutral-800 font-bold">{cause.donorsCount || 0}</strong>
                   </div>
                 </div>
 
@@ -153,7 +262,7 @@ const CauseDetail = () => {
                   </div>
                   <div className="flex flex-col min-w-0">
                     <span className="text-[10px] font-bold text-neutral-450 uppercase tracking-wider">Time Left</span>
-                    <strong className="text-xs text-neutral-800 font-bold">{cause.daysLeft} Days</strong>
+                    <strong className="text-xs text-neutral-800 font-bold">{cause.daysLeft || 30} Days</strong>
                   </div>
                 </div>
               </div>
@@ -161,15 +270,25 @@ const CauseDetail = () => {
               {/* Support Details */}
               <div className="flex flex-col gap-3">
                 <Link
-                  to={`/donate/${cause.id}`}
-                  className="w-full bg-[#1A1A18] text-white hover:bg-[#333330] py-4 rounded-full font-bold text-sm tracking-wider uppercase transition-all shadow-md flex items-center justify-center gap-2 hover:scale-[1.01]"
+                  to={cause.isVerified ? `/donate/${cause.id}` : '#'}
+                  className={`w-full text-white py-4 rounded-full font-bold text-sm tracking-wider uppercase transition-all shadow-md flex items-center justify-center gap-2 ${
+                    cause.isVerified 
+                      ? 'bg-[#1A1A18] hover:bg-[#333330] hover:scale-[1.01]' 
+                      : 'bg-neutral-350 cursor-not-allowed opacity-50'
+                  }`}
+                  onClick={(e) => {
+                    if (!cause.isVerified) {
+                      e.preventDefault();
+                      alert("This campaign is pending verification and cannot accept donations yet.");
+                    }
+                  }}
                 >
-                  <Heart className="w-4.5 h-4.5 fill-current text-red-500 animate-pulse" />
-                  <span>Donate Now</span>
+                  <Heart className={`w-4.5 h-4.5 fill-current ${cause.isVerified ? 'text-red-500 animate-pulse' : 'text-neutral-400'}`} />
+                  <span>{cause.isVerified ? 'Donate Now' : 'Pending Verification'}</span>
                 </Link>
                 
                 <p className="text-[11px] text-neutral-400 text-center font-medium">
-                  Payments are secure, 80G tax benefit applicable.
+                  {cause.isVerified ? 'Payments are secure, 80G tax benefit applicable.' : 'Fundraiser is being audited. Donations will open once verified.'}
                 </p>
               </div>
 

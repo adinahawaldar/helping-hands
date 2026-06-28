@@ -10,7 +10,8 @@ const DB_PATH = path.join(__dirname, 'db.json')
 
 const app = express()
 app.use(cors())
-app.use(express.json())
+app.use(express.json({ limit: '50mb' }))
+app.use(express.urlencoded({ limit: '50mb', extended: true }))
 
 // Initial data structure to seed database if not exists
 const initialData = {
@@ -171,7 +172,21 @@ app.get('/api/admin/pending', (req, res) => {
 })
 
 app.post('/api/causes', (req, res) => {
-  const { title, location, postedBy, category, detail, goal } = req.body
+  const { 
+    title, 
+    location, 
+    postedBy, 
+    category, 
+    detail, 
+    goal,
+    longDescription,
+    beneficiaryName,
+    phone,
+    email,
+    image,
+    supportingImages,
+    verificationDocs
+  } = req.body
 
   if (!title || !location || !postedBy || !detail || !goal) {
     return res.status(400).json({ error: "Missing required fields." })
@@ -192,11 +207,19 @@ app.post('/api/causes', (req, res) => {
     urgency: "Immediate • Pending Verification",
     category: category || "General Relief",
     detail,
+    longDescription: longDescription || detail,
+    beneficiaryName: beneficiaryName || "Self / Family",
     goal: goalVal,
     raised: 0,
     percentage: 0,
-    image: "/hero_stacked_hands.png", // Default static icon in code
+    image: image || "/hero_stacked_hands.png", // base64 or default
+    supportingImages: supportingImages || [],
+    verificationDocs: verificationDocs || [],
     postedBy,
+    phone: phone || "",
+    email: email || "",
+    donorsCount: 0,
+    daysLeft: 30,
     isVerified: false // Needs admin check
   }
 
@@ -207,6 +230,19 @@ app.post('/api/causes', (req, res) => {
     message: "Emergency request submitted successfully. It will appear publicly once verified by our team.",
     cause: newCause
   })
+})
+
+// GET a single cause detail by ID (verified or pending)
+app.get('/api/causes/:id', (req, res) => {
+  const id = parseInt(req.params.id)
+  const db = readDB()
+  const cause = db.causes.find(c => c.id === id)
+  
+  if (cause) {
+    return res.json(cause)
+  }
+  
+  res.status(404).json({ error: "Campaign not found." })
 })
 
 // POST: Record a donation to a cause

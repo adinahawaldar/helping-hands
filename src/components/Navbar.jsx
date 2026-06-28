@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Menu, X, ChevronDown, Heart, Sparkles, Building2 } from 'lucide-react'
+import { Menu, X, ChevronDown, Heart, Sparkles, Building2, Users, BookOpen } from 'lucide-react'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -70,20 +70,58 @@ const Navbar = () => {
               </button>
               
               {openDropdown === 'fundraise' && (
-                <div className="absolute top-full left-0 w-80 bg-white rounded-none shadow-xl border border-neutral-100 p-6 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
-                  <Link to="/contact" className="flex items-start gap-4 p-2 hover:bg-neutral-50 rounded-none transition-colors">
-                    <div className="w-10 h-10 bg-neutral-100 flex items-center justify-center text-brand-charcoal shrink-0">
-                      <Sparkles className="w-5 h-5" />
-                    </div>
+                <div className="absolute top-full left-0 w-[450px] bg-white rounded-none shadow-xl border border-neutral-100 p-6 z-50 animate-in fade-in slide-in-from-top-2 duration-200 grid grid-cols-12 gap-6">
+                  {/* Left Column: Actions */}
+                  <div className="col-span-7 flex flex-col gap-3 border-r border-neutral-100 pr-5">
+                    <Link to="/fundraise" className="flex items-start gap-3 p-2 hover:bg-neutral-50 rounded-none transition-colors">
+                      <div className="w-8 h-8 bg-neutral-100 flex items-center justify-center text-[#BE5B39] shrink-0">
+                        <Sparkles className="w-4.5 h-4.5" />
+                      </div>
+                      <div>
+                        <span className="block text-xs font-bold text-brand-charcoal">Start a Fundraiser</span>
+                        <span className="block text-[10px] text-neutral-400 mt-0.5">Launch a transparent campaign in minutes</span>
+                      </div>
+                    </Link>
+                    
+                    <Link to="/fundraise" className="flex items-start gap-3 p-2 hover:bg-[#F5EFE0]/50 rounded-none transition-colors">
+                      <div className="w-8 h-8 bg-[#F5EFE0] flex items-center justify-center text-brand-charcoal shrink-0">
+                        <BookOpen className="w-4.5 h-4.5" />
+                      </div>
+                      <div>
+                        <span className="block text-xs font-bold text-brand-charcoal">How it works</span>
+                        <span className="block text-[10px] text-neutral-400 mt-0.5">Learn about the 1-hour verification pipeline</span>
+                      </div>
+                    </Link>
+                    
+                    <Link to="/causes" className="flex items-start gap-3 p-2 hover:bg-neutral-50 rounded-none transition-colors">
+                      <div className="w-8 h-8 bg-neutral-100 flex items-center justify-center text-brand-charcoal shrink-0">
+                        <Users className="w-4.5 h-4.5" />
+                      </div>
+                      <div>
+                        <span className="block text-xs font-bold text-brand-charcoal">Browse active causes</span>
+                        <span className="block text-[10px] text-neutral-400 mt-0.5">See verified disaster and medical campaigns</span>
+                      </div>
+                    </Link>
+                  </div>
+                  
+                  {/* Right Column: Categories & Info */}
+                  <div className="col-span-5 flex flex-col gap-4 justify-between">
                     <div>
-                      <span className="block text-sm font-semibold text-brand-charcoal">Start a Fundraiser</span>
-                      <span className="block text-xs text-neutral-500 mt-0.5">Create a campaign for your cause</span>
+                      <span className="block text-[10px] font-bold text-neutral-400 uppercase tracking-wider mb-2">Campaign Types</span>
+                      <ul className="flex flex-col gap-1.5 pl-1 text-[11px] font-semibold text-neutral-600">
+                        <li className="hover:text-brand-charcoal transition-colors cursor-pointer">• Medical Emergencies</li>
+                        <li className="hover:text-brand-charcoal transition-colors cursor-pointer">• Disaster & Flood Relief</li>
+                        <li className="hover:text-brand-charcoal transition-colors cursor-pointer">• Education Support</li>
+                        <li className="hover:text-brand-charcoal transition-colors cursor-pointer">• Community Welfare</li>
+                      </ul>
                     </div>
-                  </Link>
-                  <div className="mt-4 border-t border-neutral-100 pt-4">
-                    <span className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider px-2 mb-2">Resources</span>
-                    <a href="#about-us" className="block px-2 py-1 text-sm text-brand-brown hover:text-brand-charcoal font-medium">How it works</a>
-                    <Link to="/impact" className="block px-2 py-1 text-sm text-brand-brown hover:text-brand-charcoal font-medium">Success stories</Link>
+                    
+                    <div className="border-t border-neutral-100 pt-3">
+                      <span className="block text-[10px] font-bold text-[#BE5B39] uppercase tracking-wider mb-1">Direct Verification</span>
+                      <p className="text-[10px] text-neutral-400 leading-normal font-medium">
+                        100% direct audit tracking with 0% platform fee.
+                      </p>
+                    </div>
                   </div>
                 </div>
               )}
@@ -185,8 +223,8 @@ const Navbar = () => {
             <div>
               <span className="block text-[11px] font-bold text-neutral-400 uppercase tracking-wider mb-2">Fundraise</span>
               <div className="flex flex-col gap-3 pl-2">
-                <Link to="/contact" onClick={() => setIsOpen(false)} className="text-sm font-semibold text-brand-charcoal">Start a Fundraiser</Link>
-                <a href="#about-us" onClick={() => setIsOpen(false)} className="text-sm font-semibold text-brand-charcoal">How it works</a>
+                <Link to="/fundraise" onClick={() => setIsOpen(false)} className="text-sm font-semibold text-brand-charcoal">Start a Fundraiser</Link>
+                <Link to="/fundraise" onClick={() => setIsOpen(false)} className="text-sm font-semibold text-brand-charcoal">How it works</Link>
               </div>
             </div>
 

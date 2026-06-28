@@ -14,6 +14,7 @@ import DonorDashboard from './pages/DonorDashboard'
 import NGODashboard from './pages/NGODashboard'
 import AdminPanel from './pages/AdminPanel'
 import Donate from './pages/Donate'
+import Fundraise from './pages/Fundraise'
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/donate/:id" element={<Donate />} />
             <Route path="/donate" element={<Donate />} />
+            <Route path="/fundraise" element={<Fundraise />} />
             {/* Dashboard and panel sub-routes are nested in their respective components */}
             <Route path="/dashboard/*" element={<DonorDashboard />} />
             <Route path="/ngo/dashboard/*" element={<NGODashboard />} />
