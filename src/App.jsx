@@ -8,6 +8,7 @@ import CauseDetail from './pages/CauseDetail'
 import NGOs from './pages/NGOs'
 import NGODetail from './pages/NGODetail'
 import About from './pages/About'
+import TransparencyPipeline from './pages/TransparencyPipeline'
 import Contact from './pages/Contact'
 import Login from './pages/Login'
 import DonorDashboard from './pages/DonorDashboard'
@@ -29,12 +30,12 @@ function App() {
             <Route path="/ngos" element={<NGOs />} />
             <Route path="/ngo/:id" element={<NGODetail />} />
             <Route path="/about" element={<About />} />
+            <Route path="/transparency" element={<TransparencyPipeline />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login />} />
             <Route path="/donate/:id" element={<Donate />} />
             <Route path="/donate" element={<Donate />} />
             <Route path="/fundraise" element={<Fundraise />} />
-            {/* Dashboard and panel sub-routes are nested in their respective components */}
             <Route path="/dashboard/*" element={<DonorDashboard />} />
             <Route path="/ngo/dashboard/*" element={<NGODashboard />} />
             <Route path="/admin/*" element={<AdminPanel />} />

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react'
+import { Mail, MapPin, ArrowUpRight } from 'lucide-react'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
@@ -9,7 +9,7 @@ const Footer = () => {
     <footer className="bg-white border-t border-neutral-200">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
-          {/* Logo & Vision */}
+          
           <div className="md:col-span-5 flex flex-col gap-6">
             <Link to="/" className="flex items-center">
               <span className="font-sans text-xl font-bold tracking-tight">
@@ -22,7 +22,6 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Quick Links */}
           <div className="md:col-span-3 flex flex-col gap-4">
             <h4 className="font-serif text-sm font-semibold tracking-wider text-brand-charcoal uppercase">
               Explore
@@ -56,7 +55,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Dashboard Portal links */}
           <div className="md:col-span-2 flex flex-col gap-4">
             <h4 className="font-serif text-sm font-semibold tracking-wider text-brand-charcoal uppercase">
               Portals
@@ -80,7 +78,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact Details */}
           <div className="md:col-span-2 flex flex-col gap-4">
             <h4 className="font-serif text-sm font-semibold tracking-wider text-brand-charcoal uppercase">
               Support
@@ -91,18 +88,13 @@ const Footer = () => {
                 <span>support@helpinghands.org</span>
               </li>
               <li className="flex items-start gap-2">
-                <Phone className="w-4 h-4 shrink-0 text-[#1A1A18] mt-0.5" />
-                <span>+91 98765 43210</span>
-              </li>
-              <li className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 shrink-0 text-[#1A1A18] mt-0.5" />
-                <span>Mumbai, Maharashtra, India</span>
+                <span>Navi Mumbai, Maharashtra, India</span>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Divider & Copyright */}
         <hr className="border-neutral-200 my-12" />
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-brand-brown">
           <p>© {currentYear} Helping Hands. All rights reserved.</p>
@@ -117,4 +109,3 @@ const Footer = () => {
 }
 
 export default Footer
-

@@ -1,6 +1,6 @@
 import React from 'react'
 import Hero from '../components/Hero'
-import USPs from '../components/USPs'
+import HowItWorks from '../components/HowItWorks'
 import FeaturedCauses from '../components/FeaturedCauses'
 import FeaturedNGOs from '../components/FeaturedNGOs'
 import Transparency from '../components/Transparency'
@@ -13,7 +13,7 @@ const Home = () => {
     <div className="flex flex-col">
       <Hero />
       <FadeIn>
-        <USPs />
+        <HowItWorks />
       </FadeIn>
       <FadeIn>
         <FeaturedCauses />
